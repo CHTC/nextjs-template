@@ -1,8 +1,15 @@
 # NextJS Static Website Template
 
-Website template using Next.js for use by the CHTC.
+Fully functional website template using Next.js for use by the CHTC.
 
-Provides a basic structure for building static websites with Next.js.
+Provides a basic structure for building static websites with Next.js with a couple nice to haves:
+
+- Solves rehydration errors when using Material UI with Next.js.
+- Theming integration with Material UI and CHTC Web Components.
+- Setting up CI/CD with GitHub Actions to deploy to GitHub Pages or other static hosting.
+- Starting points for sitemap, robots.txt, SEO Metadata, and Analytics.
+
+Please raise any issues with this template in an issue on the repository!
 
 # NPM Stack
 
