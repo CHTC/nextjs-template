@@ -1,4 +1,30 @@
-# CHTC Website 
+# NextJS Static Website Template
+
+Website template using Next.js for use by the CHTC.
+
+Provides a basic structure for building static websites with Next.js.
+
+# NPM Stack
+
+## Next.js
+
+React framework used for building the static website.
+
+https://nextjs.org/
+
+## Material UI
+
+Used for components, icons, and theming.
+
+You can find the CHTC, OSG, and Pelican MUI themes in `@chtc/web-components/themes`.
+
+https://mui.com/
+
+## CHTC Web Components
+
+Reusable components and themes for CHTC websites.
+
+https://path-cc.io/web-components/ for now, but moving to https://chtc.github.io/web-components/
 
 # Development
 
@@ -20,11 +46,3 @@ Run `pnpm run dev`.
 
 This will be the fastest if you aren't on linux.
 
-## Documentation 
-
-Navigation for the docs can be found in `/app/docs/navigation.ts`.
-
-The docs are found in `/docs/`, with their images found in `/public/docs/`.
-
-Refer to the admin docs for a [guide on writing documentation](https://badgercompute.wisc.edu/docs/admin-docs/) in this repository. If you need a custom component reach out 
-to the web staff. 
