@@ -20,6 +20,14 @@ You can find the CHTC, OSG, and Pelican MUI themes in `@chtc/web-components/them
 
 https://mui.com/
 
+### Styling with the SX prop
+
+https://mui.com/system/getting-started/usage/
+
+Material UI uses the `sx` prop for styling components. This allows you to apply styles directly to components using a JavaScript object syntax.
+
+Since we integrate with MUI themes, you can use the sx prop to access theme values like colors, spacing, and typography.
+
 ## CHTC Web Components
 
 Reusable components and themes for CHTC websites.
