@@ -11,7 +11,7 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@chtc/web-components": "^1.0.15",
+    "@chtc/web-components": "^1.0.20",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
