@@ -45,6 +45,13 @@ Since this is a static site, Server Components are primarily used during the bui
 - **Client Components:** Add `'use client'` at the top for interactive features (form handling, event listeners, browser APIs, etc.).
 - Always move client-only logic/UI into a dedicated Client Component (with `'use client'` at the top) and import it directly in Server Components.
 
+### 2.2 Page Naming and Organization Conventions
+
+Every page starts as a server component in page.tsx, so that it can interact with server-only APIs. When a page also needs client-side interactivity (e.g., hooks or browser APIs), split that logic into a separate view.tsx client component. This lets us render as much as possible on the server while isolating the parts that require client-side rendering.
+
+**page.tsx** — always a server component. Imports the client part of the page from view.tsx and passes along any server-fetched data as props.
+**view.tsx** — the client component for the page. Can use hooks and consumes data passed down from page.tsx.
+
 ---
 
 ## 3. Component Best Practices
