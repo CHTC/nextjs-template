@@ -3,20 +3,41 @@ import type { Metadata } from "next";
 import {Box} from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import CssBaseline from '@mui/material/CssBaseline';
 import { PlayArrow } from '@mui/icons-material';
 
-import UWBanner from "@chtc/web-components/UW/Banner"
-import UWFooter from "@chtc/web-components/UW/Footer"
-import theme, {fonts} from "@chtc/web-components/themes/chtc"
+import { Banner as UWBanner, Footer as UWFooter } from "@chtc/web-components"
+import { chtcTheme as theme, chtcFonts as fonts } from "@chtc/web-components/themes"
 
 import "./globals.css"
 import Header from "@/components/Header";
 import Analytics from "@/components/Analytics";
+import { siteConfig } from "@/site.config";
 
+/*
+ * Site-wide metadata. Every page inherits what it does not set, so this holds
+ * only the fields that are true of the whole site.
+ *
+ * `openGraph` and `twitter` deliberately carry no title, description or url:
+ * a child that sets plain `title`/`description` does not get its values
+ * copied into an inherited `openGraph` block, so anything named here would
+ * stick on every page. Left unset, Next fills og:title and og:description
+ * from each page's own title and description. The shared og:image comes from
+ * `opengraph-image.png` in this folder, which applies to every route.
+ */
 export const metadata: Metadata = {
-  title: "Website Template",
-  description: "Website template for CHTC projects",
-	metadataBase: new URL(`https://${process.env.HOSTNAME}`),
+  title: siteConfig.name,
+  description: siteConfig.description,
+	metadataBase: new URL(siteConfig.url),
+	applicationName: siteConfig.name,
+	openGraph: {
+		type: "website",
+		siteName: siteConfig.name,
+		locale: siteConfig.locale,
+	},
+	twitter: {
+		card: "summary_large_image",
+	},
 };
 
 const pages = [
@@ -34,16 +55,24 @@ export default function RootLayout({
 				<Analytics url={process.env.NEXT_PUBLIC_MATOMO_URL} siteId={process.env.NEXT_PUBLIC_MATOMO_SITE_ID} />
 			}
       <AppRouterCacheProvider>
-        <Box component={"body"} sx={{ margin: 0, padding: 0 }}>
-          <ThemeProvider theme={theme}>
+        {/*
+          ThemeProvider has to wrap CssBaseline and the body Box, not just the
+          page content: both read from the theme, and outside the provider they
+          resolve against MUI's default one.
+        */}
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Box component={"body"} sx={{ margin: 0, padding: 0, bgcolor: 'background.default', color: 'text.primary', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <UWBanner />
-						<Header pages={pages} />
-						{children}
+						<Header title={siteConfig.name} pages={pages} />
+						<Box component="main" sx={{ flexGrow: 1 }}>
+							{children}
+						</Box>
             <UWFooter
-                accessibilityEmail={"chtc@wisc.edu"}
+                accessibilityEmail={siteConfig.email}
             />
-          </ThemeProvider>
-        </Box>
+          </Box>
+        </ThemeProvider>
       </AppRouterCacheProvider>
     </html>
   );

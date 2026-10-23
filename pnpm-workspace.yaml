@@ -1,0 +1,12 @@
+allowBuilds:
+  esbuild: true
+  puppeteer: false
+  sharp: false
+  unrs-resolver: false
+  vue-demi: false
+minimumReleaseAgeExclude:
+  - '@chtc/web-components'
+overrides:
+  # next-image-export-optimizer@1.20.1 asks for ^0.34.5, which carries the
+  # libvips/libheif/librsvg advisories fixed in 0.35.
+  next-image-export-optimizer>sharp: ^0.35.5

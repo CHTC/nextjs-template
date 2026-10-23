@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import {Close, Forum, Menu} from "@mui/icons-material";
+import {Close, Menu} from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -18,9 +18,9 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import Link from "@mui/material/Link"
 
 import Title from "@/components/Header/Title";
-import {NavigationItem} from "@/components/Header";
+import {HeaderProps, NavigationItem} from "@/components/Header";
 
-const MobileHeader = ({pages} : {pages: NavigationItem[]}) => {
+const MobileHeader = ({title, pages} : HeaderProps) => {
 
 	const [navOpen, setNavOpen] = useState(false)
 
@@ -43,7 +43,7 @@ const MobileHeader = ({pages} : {pages: NavigationItem[]}) => {
 					</IconButton>
 				</Grid>
 				<Grid size={'auto'}>
-					<Title />
+					<Title title={title} />
 				</Grid>
 			</Grid>
 			<Drawer
@@ -60,8 +60,8 @@ const MobileHeader = ({pages} : {pages: NavigationItem[]}) => {
 					<List sx={{pt: 0}}>
 						<Box bgcolor={'primary.main'} mb={3}>
 							<ListItem>
-								<Title />
-								<IconButton onClick={handleDrawerClose} sx={{marginLeft: 'auto', color: 'primary.contrastText'}}>
+								<Title title={title} />
+								<IconButton onClick={handleDrawerClose} sx={{marginLeft: 'auto', color: 'primary.contrastText'}} aria-label="close navigation menu">
 									<Close />
 								</IconButton>
 							</ListItem>
@@ -83,7 +83,13 @@ const MobileNavigationItem = ({ page }: { page: NavigationItem }) => {
   if (page.children && page.children.length > 0) {
     return <MobileNavigationFolder page={page} />;
   } else {
-		const href = `${page.path?.replace(/\.mdx?$|\/index\.md$/, '') || ''}/`
+		const raw = page.path ?? '';
+		const isExternal = /^https?:\/\//.test(raw);
+		// Internal paths get a trailing slash (matches `trailingSlash` export);
+		// external URLs are used verbatim.
+		const href = isExternal
+			? raw
+			: `${raw.replace(/\.mdx?$|\/index\.md$/, '').replace(/\/$/, '')}/`;
     return (
 			<Link href={href} color="inherit" underline={'none'}>
 				<ListItem disablePadding>

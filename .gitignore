@@ -33,3 +33,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated Images
+**/nextImageExportOptimizer/**
+**/next-image-export-optimizer-hashes.json
+
+# Unlighthouse reports
+/.unlighthouse/

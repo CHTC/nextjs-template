@@ -5,3 +5,8 @@ export type NavigationItem = {
   children?: NavigationItem[];
 };
 
+export interface HeaderProps {
+  /** Site name shown beside the logo. */
+  title: string;
+  pages: NavigationItem[];
+}

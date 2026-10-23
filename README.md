@@ -61,3 +61,26 @@ Run `pnpm run dev`.
 
 This will be the fastest if you aren't on linux.
 
+The pnpm version is pinned by the `packageManager` field in `package.json`; CI and Docker use the same one.
+
+# Configuration
+
+- **`site.config.ts`** holds the site's name, description, contact email and URL. The layout, `robots.txt`, the web manifest and the 404 page all read from it.
+- **`app/opengraph-image.png`** is the share image for every page. Replace it (and `app/opengraph-image.alt.txt`) with the site's own artwork.
+- **`static-redirects.json`** lists old URLs to forward to new ones, as `{ "source": "/old/", "destination": "/new/" }`. Since a static export can't redirect on the server, `scripts/generate-redirects.mjs` writes a small redirect page at each source after the build.
+
+# Site Checks
+
+## Link Checking
+
+- **Internal links** are checked on every pull request by the `link-check` job in `.github/workflows/nextjs.yml`, which fails if any link within the built site is broken.
+- **External links** are checked daily by `.github/workflows/external-links.yml`. External sites fail transiently, so `scripts/external-link-history.mjs` records when each link started failing and the job only fails for links that have been broken for a week.
+
+## Lighthouse Audits
+
+[Unlighthouse](https://unlighthouse.dev/) runs Lighthouse against every page in the sitemap.
+
+Set the production URL in `unlighthouse.config.ts`, then run `pnpm run unlighthouse:live`.
+
+To scan a local build instead, serve it with `npx serve out -l 3000` and run `UNLIGHTHOUSE_SITE=http://localhost:3000 pnpm run unlighthouse:live`.
+

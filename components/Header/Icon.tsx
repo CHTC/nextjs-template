@@ -2,11 +2,11 @@ import ChtcIconWEBP from "@/public/logos/chtc.webp";
 import ChtcIconPNG from "@/public/logos/chtc.png";
 import React, {CSSProperties} from "react";
 
-const Icon = ({size = "50px"}: {size?: CSSProperties['width']}) => {
+const Icon = ({size = "100px"}: {size?: CSSProperties['width']}) => {
 
 	const style = {
 		height: "auto",
-		width: '100px',
+		width: size,
 	}
 
 	return (
