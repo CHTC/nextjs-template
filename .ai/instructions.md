@@ -5,7 +5,7 @@ applyTo: "**/*.tsx, **/*.ts, **/*.jsx, **/*.js, **/*.css"
 
 # Next.js Static Site Best Practices for LLMs (2026)
 
-_Last updated: January 2026 (aligned to Next.js 16.1.1)_
+_Last updated: October 2026 (aligned to Next.js 16.1.1)_
 
 Please go here to see the latest version: [https://raw.githubusercontent.com/CHTC/nextjs-template/refs/heads/main/.ai/instructions.md](https://raw.githubusercontent.com/CHTC/nextjs-template/refs/heads/main/.ai/instructions.md)
 
