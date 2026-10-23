@@ -99,7 +99,13 @@ Every page starts as a server component in page.tsx, so that it can interact wit
 - **Themes:** The CHTC, OSG, and Pelican MUI themes are available in `@chtc/web-components/themes`.
 - **Documentation:** For comprehensive Material UI documentation, visit [https://mui.com/](https://mui.com/).
 
-### 4.1. Styling with the SX Prop
+### 4.1. Build Custom Components on MUI
+
+- **MUI components are the base for all custom components.** Compose new components from MUI primitives (e.g., `Box`, `Stack`, `Typography`, `Button`, `Card`) rather than raw HTML elements or other UI libraries.
+- **Extend, don't replace:** If an MUI component covers the need, wrap or extend it (forwarding its props) instead of building an equivalent from scratch.
+- **Styling:** Style custom components with the `sx` prop and theme values so they stay consistent with the active theme.
+
+### 4.2. Styling with the SX Prop
 
 - **The `sx` prop** is Material UI's recommended approach for styling components. It accepts a JavaScript object with CSS properties and gives you direct access to theme values.
 - **Theme Integration:** Since your project integrates with MUI themes, use the `sx` prop to access theme values like colors, spacing, typography, and breakpoints.
